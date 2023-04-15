@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import MsgList from '../components/MsgList';
 import Link from "next/link";
+import { timestamp } from '../utility/timestamp';
+import { FaRegEnvelope, FaWhatsapp } from "react-icons/fa";
+
 
 const NotesPage = () => {
   const [msg, setMsg] = useState("");
@@ -12,8 +15,9 @@ const NotesPage = () => {
   const addClick=()=>{
     if(msg){ 
       setNoteList(pre=>([...pre, 
-        { id:noteList? noteList.length+1 : 0 ,
-          time:new Date(), 
+        { 
+          id:noteList? noteList.length+1 : 0 ,
+          time: timestamp, 
           message: msg,
         }
         ]));
@@ -42,19 +46,39 @@ const NotesPage = () => {
     window.location.href = generateEmailContent();
   }
 
+  const whatsAppClick=()=>{
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    window.open(whatsappUrl);
+  }
+
   return (
     <>
     <div className='grid grid-cols-2 gap-4 lg:mx-4 md:mx-auto mt-4'>
 
       <div className='w-full flex flex-col '>
-      <textarea name="textarea" id="textarea" cols="10" rows="10" className='border-black bg-gray-100 p-4 rounded-lg' value={msg} onChange={(e)=>setMsg(e.target.value)}></textarea>
+      <textarea name="textarea" id="textarea" value={msg} onChange={(e)=>setMsg(e.target.value)} placeholder="Type something here..."
+      style={{
+        borderRadius: '5px',
+        padding: '10px',
+        fontSize: '16px',
+        border: '2px solid #ccc',
+        outline: 'none',
+        resize: 'none',
+        width: '100%',
+        height: '200px',
+        fontFamily: 'sans-serif',
+      }}
+      />
       <div className='grid grid-cols-4 gap-2'>
         <button onClick={addClick} className={btnClass}>Add Note</button>
         <button onClick={()=>setMsg("")} className={btnClass}>Clear</button>
         <button onClick={()=>setMsg(msg.toUpperCase())} className={btnClass}>UPPERCASE</button>
         <button onClick={()=>setMsg(msg.toLowerCase())} className={btnClass}>lowercase</button>
-        <button className={btnClass} onClick={emailClick}>
-        Share Via Email
+        <button className="bg-gray-400 h-8 flex justify-center rounded-full align-middle text-center hover:shadow-xl" onClick={emailClick}>
+        <FaRegEnvelope className='h-8'/>
+        </button>
+        <button className="bg-green-600 h-8 flex justify-center rounded-full align-middle text-center hover:shadow-xl" onClick={whatsAppClick}>
+        <FaWhatsapp className='h-8'/>
         </button>
       </div>
       </div>

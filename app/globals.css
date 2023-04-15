@@ -19,3 +19,10 @@
 body {
   margin:0;
 }
+
+.rainbow-gradient {
+  background: linear-gradient(to right, 
+    from-red, from-orange, from-yellow, from-green, from-blue, from-indigo, from-purple);
+  background-size: 100%;
+  transition: background 0.5s ease-in-out;
+}

@@ -2,7 +2,8 @@ import React from 'react'
 
 const PokemonTable = ({pokemons}) => {
   return (
-    <div>
+    <div className='flex justify-center'>
+        
         <table className='border border-slate-400 border-collapse'>
             <thead>
             <th className='border border-slate-400'>S.No.</th>

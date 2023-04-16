@@ -8,6 +8,6 @@ export async function GET(request) {
     const pokemonData = pokemon?.filter(p=>
         p.name.toLowerCase().includes(name?.toLowerCase() ?? "")
         );
-    return NextResponse.json(pokemonData.slice(0, 10));
+    return NextResponse.json(pokemonData.slice(0, 15));
   }
   

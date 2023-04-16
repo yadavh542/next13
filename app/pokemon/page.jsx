@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import PokemonTable from '../components/PokemonTable';
 import {store} from "../store";
@@ -11,11 +13,11 @@ const PokemonPage = async() => {
     store.dispatch(setStartupPokemon(data));
 
   return (
-    <div className='relative h-full w-full'>
-        <div className='flex flex-col mx-auto right-0 left-0 top-0 bottom-0 absolute'>       
+    <div className='h-full w-full'>
+            
             <SearchInput/>
             <SSRPokemonTable />
-        </div>
+        
     </div>
   )
 }

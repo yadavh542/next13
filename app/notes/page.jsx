@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import MsgList from '../components/MsgList';
 import Link from "next/link";
 import { timestamp } from '../utility/timestamp';
@@ -10,6 +10,8 @@ import { FaRegEnvelope, FaWhatsapp } from "react-icons/fa";
 const NotesPage = () => {
   const [msg, setMsg] = useState("");
   const [noteList, setNoteList]= useState([]);
+  const [copiedText, setCopiedText] = useState('');
+  const textRef = useRef(null);
   const btnClass = "rounded-full bg-blue-600 p-2 text-white mt-2 hover:scale-105 transition duration-200 ease-out ";
 
   const addClick=()=>{
@@ -51,12 +53,25 @@ const NotesPage = () => {
     window.open(whatsappUrl);
   }
 
+  const copyToClipboard = () => {
+    if(msg){ 
+      textRef.current.select();
+      document.execCommand('copy');
+      setCopiedText('Text Copied');
+    }
+  };
+  
+
   return (
     <>
-    <div className='grid grid-cols-2 gap-4 lg:mx-4 md:mx-auto mt-4'>
+    <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-4 min-[320px]:mx-2 md:mx-4 mt-4'>
 
       <div className='w-full flex flex-col '>
-      <textarea name="textarea" id="textarea" value={msg} onChange={(e)=>setMsg(e.target.value)} placeholder="Type something here..."
+      <textarea name="textarea" id="textarea" 
+      value={msg} 
+      onChange={(e)=>{setMsg(e.target.value); setCopiedText('');}} 
+      placeholder="Type something here..."
+      ref={textRef}
       style={{
         borderRadius: '5px',
         padding: '10px',
@@ -70,10 +85,15 @@ const NotesPage = () => {
       }}
       />
       <div className='grid grid-cols-4 gap-2'>
-        <button onClick={addClick} className={btnClass}>Add Note</button>
+        <button onClick={addClick} 
+        className={`rounded-full bg-blue-600 ${msg && "hover:bg-green-600"} p-2 text-white mt-2 hover:scale-105 transition duration-200 ease-out hover:shadow-lg`}>
+          {msg?"Add Note":"Note is Empty"}</button>
         <button onClick={()=>setMsg("")} className={btnClass}>Clear</button>
         <button onClick={()=>setMsg(msg.toUpperCase())} className={btnClass}>UPPERCASE</button>
         <button onClick={()=>setMsg(msg.toLowerCase())} className={btnClass}>lowercase</button>
+        <button onClick={copyToClipboard} 
+        className={`rounded-full ${copiedText?"bg-green-600":"bg-blue-600"} p-2 text-white mt-2 hover:scale-105 transition duration-200 ease-out`}>
+          {copiedText? copiedText : "Copy"}</button>
         <button className="bg-gray-400 h-8 flex justify-center rounded-full align-middle text-center hover:shadow-xl" onClick={emailClick}>
         <FaRegEnvelope className='h-8'/>
         </button>

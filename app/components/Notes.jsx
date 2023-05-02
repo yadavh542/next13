@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useRef, useState } from 'react';
-import MsgList from '../components/MsgList';
+import MsgList from './MsgList';
 import Link from "next/link";
 import { timestamp } from '../utility/timestamp';
 import { FaRegEnvelope, FaWhatsapp } from "react-icons/fa";
 
 
-const NotesPage = () => {
+const Notes = () => {
   const [msg, setMsg] = useState("");
   const [noteList, setNoteList]= useState([]);
   const [copiedText, setCopiedText] = useState('');
@@ -39,7 +39,7 @@ const NotesPage = () => {
   }
 
   const generateEmailContent=()=>{
-    const subject = "Notes by Hemant";
+    const subject = "Notes from Fun Gaming Tips";
     const body = msg + ". By " + window.location.href;
     return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
@@ -114,4 +114,4 @@ const NotesPage = () => {
   )
 }
 
-export default NotesPage
+export default Notes ;

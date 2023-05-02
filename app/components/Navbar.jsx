@@ -7,13 +7,13 @@ const Navbar = () => {
     <div className='bg-blue-600 sticky top-0 z-50'>
         <ul className='flex justify-center text-center text-white font-semibold '>
             <li className={liClass}><Link href="/">Home</Link></li>
-            <li className={liClass}><Link href="/about">About</Link></li>
-            <li className={liClass}><Link href="/about/team">Team</Link></li>
-            <li className={liClass}><Link href="/pokemon">Pokemon</Link></li>
-            <li className={liClass}><Link href="/notes">Notes</Link></li>
+             <li className={liClass}><Link href="https://www.fungamingtips.com/">Blogs</Link></li>
+            {/*<li className={liClass}><Link href="/about/team">Team</Link></li> */}
+            {/* <li className={liClass}><Link href="/pokemon">Pokemon</Link></li> */}
+            {/* <li className={liClass}><Link href="/notes">Notes</Link></li> */}
         </ul>
     </div>
   )
 }
 
-export default Navbar
+export default Navbar;
